@@ -1,1 +1,2 @@
 # Introduction-to-programming-final-assignment
+## This project ‘file encryption and transfer’ is made wile keeping in mind that sue to the major advancement of information and technology many people use network for transferring and storing their data which may not be entirely safe without some protection. This file encryption system is designed to protect your data from unauthorized users on the internet by converting your sensitive data into unreadable format. This system reduces the chances of data leak and increases the information security
