@@ -4,9 +4,6 @@
 ## Structure.py
 ~~~
 class FileMetadata:
-    """
-    Custom data structure to store file metadata.
-    """
 
     def __init__(self, filename, filesize, filehash):
         self.filename = filename
@@ -23,16 +20,10 @@ import base64
 from cryptography.fernet import Fernet
 
 def generate_key_from_password(password: str) -> bytes:
-    """
-    Generates a Fernet key from user password using SHA256.
-    """
     hashed_password = hashlib.sha256(password.encode()).digest()
     return base64.urlsafe_b64encode(hashed_password)
 
 def calculate_file_hash(file_path: str) -> str:
-    """
-    Calculates SHA256 hash of a file.
-    """
     sha256 = hashlib.sha256()
 
     with open(file_path, "rb") as f:
@@ -48,9 +39,6 @@ from utils import generate_key_from_password, calculate_file_hash
 from structures import FileMetadata
 
 def encrypt_file(file_path: str, password: str):
-    """
-    Encrypts file using password-based key.
-    """
     key = generate_key_from_password(password)
     fernet = Fernet(key)
 
@@ -71,9 +59,6 @@ def encrypt_file(file_path: str, password: str):
 
 
 def decrypt_file(file_path: str, password: str):
-    """
-    Decrypts encrypted file.
-    """
     key = generate_key_from_password(password)
     fernet = Fernet(key)
 
@@ -228,7 +213,6 @@ tk.Button(root, text="Send File", bg=BUTTON_COLOR, fg=TEXT_COLOR,
 tk.Button(root, text="Receive File", bg=BUTTON_COLOR, fg=TEXT_COLOR,
           width=25, command=receive_action).pack(pady=6)
 
-# 🎯 Progress Bar
 progress_bar = ttk.Progressbar(root, orient="horizontal",
                                 length=400, mode="determinate")
 progress_bar.pack(pady=15)
@@ -251,9 +235,6 @@ SEPARATOR = "<SEPARATOR>"
 
 
 def send_file(file_path: str, host: str, port: int = 5001, progress_callback=None):
-    """
-    Sends file over local network.
-    """
     s = socket.socket()
     s.connect((host, port))
 
@@ -281,7 +262,7 @@ def receive_file(host="0.0.0.0", port=5001, progress_callback=None):
     Receives file from sender.
     """
     s = socket.socket()
-    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)  # 🔥 fixes error 10048
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)  
     s.bind((host, port))
     s.listen(1)
 
